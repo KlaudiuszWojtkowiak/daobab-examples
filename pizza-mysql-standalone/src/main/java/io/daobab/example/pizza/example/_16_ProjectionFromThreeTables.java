@@ -11,6 +11,7 @@ import io.daobab.example.pizza.example.base.DaobabExample;
 import io.daobab.example.pizza.example.base.Executor;
 import io.daobab.example.pizza.example.projection.PizzaPriceProjection;
 import io.daobab.model.FieldRow;
+import io.daobab.statement.condition.Operator;
 import io.daobab.statement.condition.Order;
 import io.daobab.statement.condition.base.Where;
 
@@ -25,6 +26,13 @@ public class _16_ProjectionFromThreeTables implements DaobabExample{
 	@Override
 	public void test() {
 		
+		Select.from(daoPizza)
+			.whereSelect(daoPizza.colPizzaId(),Operator.IN,
+					Select.fieldList(daoPizzaPrice.colPizzaId()).where(daoPizzaPrice.colPrice(),Operator.GREATER_THAN,10.0)
+				)
+			.result();
+		
+		
 		Select.fieldBox(daoPizza.colName(),daoPizzaSize.colName(),daoPizzaPrice.colPrice())
 				.where(Where.AND()
 						.and(daoPizzaPrice.colPizzaId(),daoPizza.colPizzaId())
@@ -37,6 +45,10 @@ public class _16_ProjectionFromThreeTables implements DaobabExample{
 				.map(this::parseToPizzaPrice)
 				.consumeEach((c)->System.out.println(c.toString()));
 	}
+	
+	
+	
+	
 	
 	private PizzaPriceProjection parseToPizzaPrice(FieldRow r) {
 		return new PizzaPriceProjection(

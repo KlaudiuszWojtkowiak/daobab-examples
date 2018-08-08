@@ -26,8 +26,6 @@ public class EntityManagerProducer  implements Serializable {
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
         properties.put("hibernate.show_sql", "false");
         properties.put("hibernate.ejb.entitymanager_factory_name", DictDataBaseUnit.PIZZA_DATABASE);
-//        properties.put("hibernate.connection.username", "collector");
-//        properties.put("hibernate.connection.password", "c0ll3ct0r");
         properties.put("hibernate.connection.username", "root");
         properties.put("hibernate.connection.password", "admin");
         properties.put("hibernate.connection.pool_size", "5");

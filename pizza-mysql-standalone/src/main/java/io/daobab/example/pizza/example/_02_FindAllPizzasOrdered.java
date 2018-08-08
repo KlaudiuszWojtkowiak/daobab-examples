@@ -26,6 +26,7 @@ public class _02_FindAllPizzasOrdered implements DaobabExample{
 		//Print result:
 		pizzas.forEach(Printer::printPizza);
 	}
+	
 
 	
 	public static void main(String[] args) {

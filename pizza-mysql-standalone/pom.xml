@@ -37,7 +37,7 @@
 		<dependency>
 			<groupId>io.daobab</groupId>
 			<artifactId>daobab</artifactId>
-			<version>1.1.1</version>
+			<version>1.2.0</version>
 			<scope>compile</scope>
 		</dependency>
 
