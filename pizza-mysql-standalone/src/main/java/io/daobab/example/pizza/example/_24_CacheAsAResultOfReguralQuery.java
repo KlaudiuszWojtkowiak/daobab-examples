@@ -23,18 +23,18 @@ public class _24_CacheAsAResultOfReguralQuery implements DaobabExample{
 	@Override
 	public void test() {
 		//Task: Select all pizzas
-		CachedList<Pizza> pizzabuffor=Select.all(daoPizza); 
+		CachedList<Pizza> pizzabuffer=Select.all(daoPizza); 
 		
 		
 		//Alternatively:
 		// List<Pizza> pizzas=Select.from(daoPizza).result();
 		
 		//Print result:
-		pizzabuffor.forEach(Printer::printPizza);
+		pizzabuffer.forEach(Printer::printPizza);
 		
 		System.out.println("--------- query in buffer - no sql below");
 		
-			Select.from(pizzabuffor)
+			Select.from(pizzabuffer)
 			.where(daoPizza.colName(), Operator.IN,DictPizzaName.MARGHERITA,DictPizzaName.EUROPEAN,DictPizzaName.CARBONARA)
 			.consumeEach(Printer::printPizza);
 	}
