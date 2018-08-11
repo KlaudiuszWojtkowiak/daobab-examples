@@ -7,6 +7,7 @@ import io.daobab.Select;
 import io.daobab.example.pizza.dao.IDaoPizza;
 import io.daobab.example.pizza.example.base.DaobabExample;
 import io.daobab.example.pizza.example.base.Printer;
+import io.daobab.statement.condition.Limit;
 import io.daobab.example.pizza.example.base.Executor;
 
 
@@ -17,7 +18,11 @@ public class _01_FindAllPizzasLimited implements DaobabExample{
 	
 	@Override
 	public void test() {
-		Select.from(daoPizza).limitBy(5).consumeEach(Printer::printPizza);
+		Limit dynamicLimit=new Limit();
+		dynamicLimit.setOffset(16);
+		dynamicLimit.setLimit(8);
+		
+		Select.from(daoPizza).limitBy(dynamicLimit).consumeEach(Printer::printPizza);
 	}
 	
 
