@@ -1,7 +1,10 @@
 package io.daobab.example.pizza.example;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
+
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import io.daobab.Select;
 import io.daobab.example.pizza.dao.IDaoPizza;
@@ -10,7 +13,8 @@ import io.daobab.example.pizza.example.base.Executor;
 import io.daobab.statement.condition.Operator;
 
 
-@Singleton
+@Component
+@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class _05_CountPizzaWithConditions implements DaobabExample{
 	
 	private @Inject IDaoPizza daoPizza;

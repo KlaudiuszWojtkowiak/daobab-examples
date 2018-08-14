@@ -1,44 +1,39 @@
 package io.daobab.example.pizza.example;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
+
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import io.daobab.Select;
 import io.daobab.example.pizza.dao.IDaoPizza;
 import io.daobab.example.pizza.example.base.DaobabExample;
 import io.daobab.example.pizza.example.base.Executor;
-import io.daobab.statement.condition.Operator;
 
 
-@Singleton
-public class _05_CountPizzaWithConditions implements DaobabExample{
+@Component
+@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
+public class _06_CountPizzaBetween implements DaobabExample{
 	
 	private @Inject IDaoPizza daoPizza;
 	
 	@Override
 	public void test() {
-		//Task: Count pizzas with conditions
-		
-		
-		
-		Long count=Select.from(daoPizza)
-				.where(daoPizza.colPizzaId(),Operator.GREATER_THAN,5)
+		//Task: Count pizzas between conditions
+		Long count=Select.entityList(daoPizza)
+				.whereBetween(daoPizza.colPizzaId(),1,6)
 				.countAny();
 		
-		
-		
-		
-		
-		
 		//Print result:
-		System.out.println("Count pizzas with id greater thant 5 : "+count);
+		System.out.println("Count pizzas with between : "+count);
 	}
 	
 	/**
 	 Similar Examples:
 	  1. Count with two where:
 	  
-	 		Long count=Select.from(daoPizza)
+	 		Long count=Select.entityList(daoPizza)
 			.where(Where.AND()
 					.and(daoPizza.colPizzaId(),Operator.GREATER_THAN,5)
 					.and(daoPizza.colPizzaId(),Operator.LESS_THAN,10)
@@ -51,7 +46,7 @@ public class _05_CountPizzaWithConditions implements DaobabExample{
 
 	
 		public static void main(String[] args) {
-			Executor.runTest(_05_CountPizzaWithConditions.class);
+			Executor.runTest(_06_CountPizzaBetween.class);
 		}
 
 }
