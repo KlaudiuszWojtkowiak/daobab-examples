@@ -17,7 +17,7 @@ public class DaobabCreator {
    private static String SCHEMA="pizza";
 
    private static String JAVA_PACKAGE="io.daobab.example.springboot.blank.dao";
-   private static String FILE_DIRECTORY_PATH ="C:\\Users\\Klaudiusz\\IdeaProjects\\test\\daobab_blank_springboot\\src\\main\\java\\io\\daobab\\example\\springboot\\blank\\dao";
+   private static String FILE_DIRECTORY_PATH ="C:\\DAOBAB_SRC_FOLDER\\src\\main\\java\\io\\daobab\\example\\springboot\\blank\\dao";
 
 
 
