@@ -7,10 +7,10 @@ import io.daobab.example.daobab_vs_jpa_criteria.jpa.entity._Pizza;
 import org.hibernate.Criteria;
 import org.hibernate.query.Query;
 
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 
+import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.List;
 
 import static io.daobab.statement.condition.Operator.*;
