@@ -5,6 +5,7 @@ import io.daobab.example.sakila.dao.sakila.SakilaDataBase;
 import io.daobab.example.sakila.dao.sakila.SakilaTables;
 import io.daobab.example.sakila.dao.sakila.table.Actor;
 import io.daobab.example.sakila.dao.sakila.table.Customer;
+import io.daobab.example.sakila.dao.sakila.table.Film;
 import io.daobab.model.FlatProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,30 +24,44 @@ public class Controller implements SakilaTables {
     @Autowired
     private SakilaDataBase db;
 
-    @GetMapping("/t01")
-    public List<Actor> t01(){
+    @GetMapping("/actorList")
+    public List<Actor> actorList(){
         return Select.from(db,tabActor)
-                .where(AND()
-                        .and(tabActor.colActorId(),GT,100)
-                        .and(tabActor.colActorId(),LT,110)
-                )
+                .orderAscBy(tabActor.colID())
                 .result();
     }
 
-    @GetMapping("/t02")
-    public Customer t02(int id){
-        return Select.one(db,tabCustomer)
-                .where(tabCustomer.colID(),EQ,id)
-                .result();
-    }
-
-
-    @GetMapping("/t03")
-    public FlatProjection t03(int id){
-        return Select.one(db,tabCustomer.colFirstName(),tabCustomer.colLastName(),tabAddress.colCityId(),tabAddress.colPhone())
-                .join(tabAddress,tabCustomer.colAddressId())
-                .where(tabCustomer.colID(),EQ,id)
+    @GetMapping("/actorNameById")
+    public FlatProjection actorNameById(int actorId){
+        return Select.one(db,tabActor.colFirstName(),tabActor.colLastName())
+                .where(tabActor.colID(),EQ,actorId)
                 .flat()
+                .result();
+    }
+
+    @GetMapping("/actorById")
+    public Actor actorById(int actorId){
+        return Select.one(db,tabActor)
+                .where(tabActor.colID(),EQ,actorId)
+                .result();
+    }
+
+    @GetMapping("/actorMovies")
+    public List<Film> actorMovies(int actorId){
+        return Select.from(db,tabFilm)
+                .join(tabFilmActor,tabFilm.colFilmId())
+                .join(tabActor,tabFilmActor.colActorId(),
+                        AND().and(tabActor.colID(),EQ,actorId))
+                .result();
+    }
+
+
+    @GetMapping("/actorFilmCategories")
+    public List<String> actorFilmCategories(int actorId){
+        return Select.from(db,tabCategory.colNameTypeString1())
+                .join(tabFilmCategory,tabCategory.colCategoryId())
+                .join(tabFilm,tabFilmCategory.colFilmId())
+                .join(tabFilmActor,tabFilm.colFilmId(),AND().and(tabFilmActor.colActorId(),EQ,actorId))
                 .result();
     }
 
