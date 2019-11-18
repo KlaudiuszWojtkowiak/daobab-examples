@@ -1,0 +1,16 @@
+server:
+    port: 9111
+
+
+logging:
+    level:
+        org.springframework: INFO
+        guru.springframework.controllers: DEBUG
+        org.hibernate: ERROR
+        org.reflections.Reflections: ERROR
+
+
+org:
+    jline:
+        terminal:
+            dumb: true
