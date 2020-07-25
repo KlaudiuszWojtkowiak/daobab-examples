@@ -21,7 +21,7 @@ public class GetWhereAndOr implements TestBase {
 
     @Override
     public void daobab() {
-       List<Pizza> results=Select.from(db,tabPizza)
+       List<Pizza> results=Select.many(db,tabPizza)
            .where(AND()
                .and(OR()
                    .or(tabPizza.colName(),LIKE,"%A%")

@@ -3,12 +3,12 @@ package io.daobab.example.daobab_vs_jpa_criteria.daobab.pizza.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.ColumnRelationMap;
+import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
 
 import java.lang.String;
 
-public interface Name<E extends EntityMap> extends ColumnRelationMap<E> {
+public interface Name<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
@@ -37,18 +37,18 @@ public interface Name<E extends EntityMap> extends ColumnRelationMap<E> {
             }
 
             @Override
-            public Class<String> getColumnClass(){
+            public Class<String> getFieldClass(){
                 return  String.class;
             }
 
             @Override
-            public String getColumnValue(Name entity){
+            public String getFieldValue(Name entity){
                 if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"name");
                 return  entity.getName();
             }
 
             @Override
-            public void setColumnValue(Name entity, String param){
+            public void setFieldValue(Name entity, String param){
                 if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"name");
                 entity.setName(param);
             }

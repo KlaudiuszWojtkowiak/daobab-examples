@@ -22,7 +22,7 @@ public class GetWhereGroupLogically implements TestBase {
 
     @Override
     public void daobab() {
-        List<Pizza> results=Select.from(db,tabPizza)
+        List<Pizza> results=Select.many(db,tabPizza)
             .where(AND()
                 .and(tabPizza.colDescription(),NOT_NULL)
                 .and(AND()

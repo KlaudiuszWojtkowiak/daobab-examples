@@ -19,7 +19,7 @@ public class GetWhereNameLike implements TestBase {
 
     @Override
     public void daobab() {
-       Pizza results=Select.entity(db,tabPizza).where(tabPizza.colName(),LIKE,"%A%").result();
+       Pizza results=Select.one(db,tabPizza).where(tabPizza.colName(),LIKE,"%A%").result();
     }
 
     @Override

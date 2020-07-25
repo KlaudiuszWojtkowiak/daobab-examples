@@ -3,12 +3,12 @@ package io.daobab.example.daobab_vs_jpa_criteria.daobab.pizza.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.ColumnRelationMap;
+import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
 
 import java.math.BigDecimal;
 
-public interface Vegan<E extends EntityMap> extends ColumnRelationMap<E> {
+public interface Vegan<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
@@ -37,18 +37,18 @@ public interface Vegan<E extends EntityMap> extends ColumnRelationMap<E> {
             }
 
             @Override
-            public Class<BigDecimal> getColumnClass(){
+            public Class<BigDecimal> getFieldClass(){
                 return  BigDecimal.class;
             }
 
             @Override
-            public BigDecimal getColumnValue(Vegan entity){
+            public BigDecimal getFieldValue(Vegan entity){
                 if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"vegan");
                 return  entity.getVegan();
             }
 
             @Override
-            public void setColumnValue(Vegan entity, BigDecimal param){
+            public void setFieldValue(Vegan entity, BigDecimal param){
                 if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"vegan");
                 entity.setVegan(param);
             }

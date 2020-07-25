@@ -16,7 +16,7 @@ public class GetById implements TestBase {
 
     @Override
     public void daobab() {
-       Pizza results=Select.entity(db,tabPizza).where(tabPizza.colPizzaId(),GT,toBigDecimal(10)).result();
+       Pizza results=Select.one(db,tabPizza).where(tabPizza.colPizzaId(),GT,toBigDecimal(10)).result();
     }
 
     @Override
