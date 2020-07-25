@@ -3,12 +3,12 @@ package io.daobab.example.springboot.blank.dao.pizza.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.ColumnRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
 
 import java.math.BigDecimal;
 
-public interface PizzaPriceId<E extends EntityMap> extends ColumnRelationMap<E> {
+public interface PizzaPriceId<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
@@ -18,7 +18,7 @@ public interface PizzaPriceId<E extends EntityMap> extends ColumnRelationMap<E> 
     default BigDecimal getPizzaPriceId(){return getColumnParam("pizzaPriceId");}
     default E setPizzaPriceId(BigDecimal val){setColumnParam("pizzaPriceId",val); return (E)this;}
 
-    default Column<E,BigDecimal,PizzaPriceId> colPizzaPriceId(){
+    default Column<E, BigDecimal,PizzaPriceId> colPizzaPriceId(){
         return new Column<>() {
 
             @Override
@@ -37,18 +37,18 @@ public interface PizzaPriceId<E extends EntityMap> extends ColumnRelationMap<E> 
             }
 
             @Override
-            public Class<BigDecimal> getColumnClass(){
+            public Class<BigDecimal> getFieldClass(){
                 return  BigDecimal.class;
             }
 
             @Override
-            public BigDecimal getColumnValue(PizzaPriceId entity){
+            public BigDecimal getFieldValue(PizzaPriceId entity){
                 if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"pizzaPriceId");
                 return  entity.getPizzaPriceId();
             }
 
             @Override
-            public void setColumnValue(PizzaPriceId entity, BigDecimal param){
+            public void setFieldValue(PizzaPriceId entity, BigDecimal param){
                 if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"pizzaPriceId");
                 entity.setPizzaPriceId(param);
             }

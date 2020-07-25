@@ -3,12 +3,12 @@ package io.daobab.example.springboot.blank.dao.pizza.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.ColumnRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
 
 import java.math.BigDecimal;
 
-public interface CustomerId<E extends EntityMap> extends ColumnRelationMap<E> {
+public interface CustomerId<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
@@ -18,7 +18,7 @@ public interface CustomerId<E extends EntityMap> extends ColumnRelationMap<E> {
     default BigDecimal getCustomerId(){return getColumnParam("customerId");}
     default E setCustomerId(BigDecimal val){setColumnParam("customerId",val); return (E)this;}
 
-    default Column<E,BigDecimal,CustomerId> colCustomerId(){
+    default Column<E, BigDecimal,CustomerId> colCustomerId(){
         return new Column<>() {
 
             @Override
@@ -37,18 +37,18 @@ public interface CustomerId<E extends EntityMap> extends ColumnRelationMap<E> {
             }
 
             @Override
-            public Class<BigDecimal> getColumnClass(){
+            public Class<BigDecimal> getFieldClass(){
                 return  BigDecimal.class;
             }
 
             @Override
-            public BigDecimal getColumnValue(CustomerId entity){
+            public BigDecimal getFieldValue(CustomerId entity){
                 if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"customerId");
                 return  entity.getCustomerId();
             }
 
             @Override
-            public void setColumnValue(CustomerId entity, BigDecimal param){
+            public void setFieldValue(CustomerId entity, BigDecimal param){
                 if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"customerId");
                 entity.setCustomerId(param);
             }

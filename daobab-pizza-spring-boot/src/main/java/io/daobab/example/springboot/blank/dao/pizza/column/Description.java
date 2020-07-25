@@ -3,12 +3,10 @@ package io.daobab.example.springboot.blank.dao.pizza.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.ColumnRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
 
-import java.lang.String;
-
-public interface Description<E extends EntityMap> extends ColumnRelationMap<E> {
+public interface Description<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
@@ -18,7 +16,7 @@ public interface Description<E extends EntityMap> extends ColumnRelationMap<E> {
     default String getDescription(){return getColumnParam("description");}
     default E setDescription(String val){setColumnParam("description",val); return (E)this;}
 
-    default Column<E,String,Description> colDescription(){
+    default Column<E, String,Description> colDescription(){
         return new Column<>() {
 
             @Override
@@ -37,18 +35,18 @@ public interface Description<E extends EntityMap> extends ColumnRelationMap<E> {
             }
 
             @Override
-            public Class<String> getColumnClass(){
+            public Class<String> getFieldClass(){
                 return  String.class;
             }
 
             @Override
-            public String getColumnValue(Description entity){
+            public String getFieldValue(Description entity){
                 if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"description");
                 return  entity.getDescription();
             }
 
             @Override
-            public void setColumnValue(Description entity, String param){
+            public void setFieldValue(Description entity, String param){
                 if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"description");
                 entity.setDescription(param);
             }

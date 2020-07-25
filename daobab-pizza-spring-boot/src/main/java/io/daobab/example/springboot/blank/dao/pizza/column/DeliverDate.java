@@ -3,12 +3,12 @@ package io.daobab.example.springboot.blank.dao.pizza.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.ColumnRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
 
 import java.sql.Timestamp;
 
-public interface DeliverDate<E extends EntityMap> extends ColumnRelationMap<E> {
+public interface DeliverDate<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
@@ -18,7 +18,7 @@ public interface DeliverDate<E extends EntityMap> extends ColumnRelationMap<E> {
     default Timestamp getDeliverDate(){return getColumnParam("deliverDate");}
     default E setDeliverDate(Timestamp val){setColumnParam("deliverDate",val); return (E)this;}
 
-    default Column<E,Timestamp,DeliverDate> colDeliverDate(){
+    default Column<E, Timestamp,DeliverDate> colDeliverDate(){
         return new Column<>() {
 
             @Override
@@ -37,18 +37,18 @@ public interface DeliverDate<E extends EntityMap> extends ColumnRelationMap<E> {
             }
 
             @Override
-            public Class<Timestamp> getColumnClass(){
+            public Class<Timestamp> getFieldClass(){
                 return  Timestamp.class;
             }
 
             @Override
-            public Timestamp getColumnValue(DeliverDate entity){
+            public Timestamp getFieldValue(DeliverDate entity){
                 if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"deliverDate");
                 return  entity.getDeliverDate();
             }
 
             @Override
-            public void setColumnValue(DeliverDate entity, Timestamp param){
+            public void setFieldValue(DeliverDate entity, Timestamp param){
                 if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"deliverDate");
                 entity.setDeliverDate(param);
             }

@@ -3,12 +3,12 @@ package io.daobab.example.springboot.blank.dao.pizza.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.ColumnRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
 
 import java.math.BigDecimal;
 
-public interface OrderAdditionalId<E extends EntityMap> extends ColumnRelationMap<E> {
+public interface OrderAdditionalId<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
@@ -18,7 +18,7 @@ public interface OrderAdditionalId<E extends EntityMap> extends ColumnRelationMa
     default BigDecimal getOrderAdditionalId(){return getColumnParam("orderAdditionalId");}
     default E setOrderAdditionalId(BigDecimal val){setColumnParam("orderAdditionalId",val); return (E)this;}
 
-    default Column<E,BigDecimal,OrderAdditionalId> colOrderAdditionalId(){
+    default Column<E, BigDecimal,OrderAdditionalId> colOrderAdditionalId(){
         return new Column<>() {
 
             @Override
@@ -37,18 +37,18 @@ public interface OrderAdditionalId<E extends EntityMap> extends ColumnRelationMa
             }
 
             @Override
-            public Class<BigDecimal> getColumnClass(){
+            public Class<BigDecimal> getFieldClass(){
                 return  BigDecimal.class;
             }
 
             @Override
-            public BigDecimal getColumnValue(OrderAdditionalId entity){
+            public BigDecimal getFieldValue(OrderAdditionalId entity){
                 if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"orderAdditionalId");
                 return  entity.getOrderAdditionalId();
             }
 
             @Override
-            public void setColumnValue(OrderAdditionalId entity, BigDecimal param){
+            public void setFieldValue(OrderAdditionalId entity, BigDecimal param){
                 if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"orderAdditionalId");
                 entity.setOrderAdditionalId(param);
             }

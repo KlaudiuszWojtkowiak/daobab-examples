@@ -26,19 +26,19 @@ public class Controller implements PizzaTables {
 
 
     @GetMapping("/t01")
-    public Long t01(){ return Select.from(db,tabPizza).countAny(); }
+    public Long t01(){ return Select.many(db,tabPizza).countAny(); }
 
     @GetMapping("/t02")
-    public List<String> t02(){ return Select.from(db,tabIngredient.colName()).where(tabIngredient.colName(),LIKE,"%A%").result(); }
+    public List<String> t02(){ return Select.many(db,tabIngredient.colName()).where(tabIngredient.colName(),LIKE,"%A%").result(); }
 
     @GetMapping("/t03")
-    public ProjectionBox t03(){ return Select.from(db,tabPizza.colID(),tabPizza.colName()).where(tabPizza.colID(),GT,toBigDecimal(10)).result(); }
+    public ProjectionBox t03(){ return Select.many(db,tabPizza.colID(),tabPizza.colName()).where(tabPizza.colID(),GT,toBigDecimal(10)).result(); }
 
     @GetMapping("/t04")
-    public List<String> t04(){ return Select.fieldList(db,tabPizza.colName()).orderAscBy(tabPizza.colName()).result(); }
+    public List<String> t04(){ return Select.many(db,tabPizza.colName()).orderAscBy(tabPizza.colName()).result(); }
 
     @GetMapping("/t05")
-    public List<String> t05(){  return Select.fieldList(db,tabIngredient.colName())
+    public List<String> t05(){  return Select.many(db,tabIngredient.colName())
         .join(tabPizzaIngredient,tabIngredient.colIngredientId())
         .join(tabPizza,tabPizzaIngredient.colPizzaId(),AND().and(tabPizza.colName(),"CIAO ROMA"))
         .result(); }

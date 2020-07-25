@@ -3,12 +3,12 @@ package io.daobab.example.springboot.blank.dao.pizza.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.ColumnRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
 
 import java.math.BigDecimal;
 
-public interface HotRange<E extends EntityMap> extends ColumnRelationMap<E> {
+public interface HotRange<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
@@ -18,7 +18,7 @@ public interface HotRange<E extends EntityMap> extends ColumnRelationMap<E> {
     default BigDecimal getHotRange(){return getColumnParam("hotRange");}
     default E setHotRange(BigDecimal val){setColumnParam("hotRange",val); return (E)this;}
 
-    default Column<E,BigDecimal,HotRange> colHotRange(){
+    default Column<E, BigDecimal,HotRange> colHotRange(){
         return new Column<>() {
 
             @Override
@@ -37,18 +37,18 @@ public interface HotRange<E extends EntityMap> extends ColumnRelationMap<E> {
             }
 
             @Override
-            public Class<BigDecimal> getColumnClass(){
+            public Class<BigDecimal> getFieldClass(){
                 return  BigDecimal.class;
             }
 
             @Override
-            public BigDecimal getColumnValue(HotRange entity){
+            public BigDecimal getFieldValue(HotRange entity){
                 if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"hotRange");
                 return  entity.getHotRange();
             }
 
             @Override
-            public void setColumnValue(HotRange entity, BigDecimal param){
+            public void setFieldValue(HotRange entity, BigDecimal param){
                 if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"hotRange");
                 entity.setHotRange(param);
             }

@@ -3,12 +3,10 @@ package io.daobab.example.springboot.blank.dao.pizza.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.ColumnRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
 
-import java.lang.String;
-
-public interface Name<E extends EntityMap> extends ColumnRelationMap<E> {
+public interface Name<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
@@ -18,7 +16,7 @@ public interface Name<E extends EntityMap> extends ColumnRelationMap<E> {
     default String getName(){return getColumnParam("name");}
     default E setName(String val){setColumnParam("name",val); return (E)this;}
 
-    default Column<E,String,Name> colName(){
+    default Column<E, String,Name> colName(){
         return new Column<>() {
 
             @Override
@@ -37,18 +35,18 @@ public interface Name<E extends EntityMap> extends ColumnRelationMap<E> {
             }
 
             @Override
-            public Class<String> getColumnClass(){
+            public Class<String> getFieldClass(){
                 return  String.class;
             }
 
             @Override
-            public String getColumnValue(Name entity){
+            public String getFieldValue(Name entity){
                 if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"name");
                 return  entity.getName();
             }
 
             @Override
-            public void setColumnValue(Name entity, String param){
+            public void setFieldValue(Name entity, String param){
                 if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"name");
                 entity.setName(param);
             }
