@@ -3,13 +3,13 @@ package io.daobab.example.sakila.dao.sakila.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.ColumnRelationMap;
+import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
 import java.util.Objects;
 
 import java.lang.String;
 
-public interface Username<E extends EntityMap> extends ColumnRelationMap<E> {
+public interface Username<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
@@ -38,18 +38,18 @@ public interface Username<E extends EntityMap> extends ColumnRelationMap<E> {
             }
 
             @Override
-            public Class<String> getColumnClass(){
+            public Class<String> getFieldClass(){
                 return  String.class;
             }
 
             @Override
-            public String getColumnValue(Username entity){
+            public String getFieldValue(Username entity){
                 if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"Username");
                 return  entity.getUsername();
             }
 
             @Override
-            public void setColumnValue(Username entity, String param){
+            public void setFieldValue(Username entity, String param){
                 if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"Username");
                 entity.setUsername(param);
             }

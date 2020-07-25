@@ -3,13 +3,13 @@ package io.daobab.example.sakila.dao.sakila.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.ColumnRelationMap;
+import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
 import java.util.Objects;
 
 import java.lang.Boolean;
 
-public interface Active<E extends EntityMap> extends ColumnRelationMap<E> {
+public interface Active<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
@@ -38,18 +38,18 @@ public interface Active<E extends EntityMap> extends ColumnRelationMap<E> {
             }
 
             @Override
-            public Class<Boolean> getColumnClass(){
+            public Class<Boolean> getFieldClass(){
                 return  Boolean.class;
             }
 
             @Override
-            public Boolean getColumnValue(Active entity){
+            public Boolean getFieldValue(Active entity){
                 if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"Active");
                 return  entity.getActive();
             }
 
             @Override
-            public void setColumnValue(Active entity, Boolean param){
+            public void setFieldValue(Active entity, Boolean param){
                 if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"Active");
                 entity.setActive(param);
             }

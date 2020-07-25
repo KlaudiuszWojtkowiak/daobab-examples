@@ -32,7 +32,7 @@ public class DaobabTest implements SakilaTables {
 
         var actor= Select.one(db,tabActor).where(tabActor.colActorId(),EQ,1).result();
 
-         List<Film> res= Select.from(db,tabFilm)
+         List<Film> res= Select.many(db,tabFilm)
                  .join(tabFilmActor,tabFilm.colFilmId())
                  .join(tabActor,tabFilmActor.colActorId())
                 .where(tabActor.colActorId(),EQ,actor)
@@ -43,7 +43,7 @@ public class DaobabTest implements SakilaTables {
     @Test
     public void t02(){
 
-        Select.from(db, tabFilm.colTitle(),tabCategory.colNameTypeString1())
+        Select.many(db, tabFilm.colTitle(),tabCategory.colNameTypeString1())
                 .join(tabAddress,tabCustomer.colAddressId())
                 .join(tabCity,tabAddress.colCityId())
                 .join(tabRental,tabCustomer.colCustomerId(),AND().and(tabCustomer.colID(),EQ,6))
@@ -55,12 +55,12 @@ public class DaobabTest implements SakilaTables {
 //                .groupBy(tabFilmCategory.colCategoryId())
                 .orderBy(new Order().asc(tabCategory.colNameTypeString1()).asc(tabFilm.colTitle()))
                 .flat()
-                .consumeEach(this::print);
+                .forEach(this::print);
     }
 
 
     @Test
-    public <C extends Column<E,String, ColumnRelation<E>>,E extends EntityMap & PrimaryKey<E,? extends Number,?> & LastUpdate<E>> void t03(E table, C column){
+    public <C extends Column<E,String, EntityRelation<E>>,E extends EntityMap & PrimaryKey<E,? extends Number,?> & LastUpdate<E>> void t03(E table, C column){
         String t=a03(tabCustomer.colLastName());
 
         var last=a04(tabCustomer.colLastUpdate());
@@ -72,9 +72,9 @@ public class DaobabTest implements SakilaTables {
                 .result();
     }
     public <C extends Column<E,String,?>,E extends Table & PrimaryKey<E,? extends Number,?> & LastUpdate<E>> void a02(E table){
-        Select.from(db, table)
+        Select.many(db, table)
                 .orderDescBy(table.colLastUpdate())
-                .consumeEach(this::print);
+                .forEach(this::print);
     }
 
     public <C extends Column<E,Timestamp,?>,E extends Table>  E a04(C column){

@@ -3,13 +3,13 @@ package io.daobab.example.sakila.dao.sakila.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.ColumnRelationMap;
+import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
 import java.util.Objects;
 
 import java.lang.Integer;
 
-public interface PaymentId<E extends EntityMap> extends ColumnRelationMap<E> {
+public interface PaymentId<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
@@ -38,18 +38,18 @@ public interface PaymentId<E extends EntityMap> extends ColumnRelationMap<E> {
             }
 
             @Override
-            public Class<Integer> getColumnClass(){
+            public Class<Integer> getFieldClass(){
                 return  Integer.class;
             }
 
             @Override
-            public Integer getColumnValue(PaymentId entity){
+            public Integer getFieldValue(PaymentId entity){
                 if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"PaymentId");
                 return  entity.getPaymentId();
             }
 
             @Override
-            public void setColumnValue(PaymentId entity, Integer param){
+            public void setFieldValue(PaymentId entity, Integer param){
                 if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"PaymentId");
                 entity.setPaymentId(param);
             }

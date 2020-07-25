@@ -26,7 +26,7 @@ public class Controller implements SakilaTables {
 
     @GetMapping("/actorList")
     public List<Actor> actorList(){
-        return Select.from(db,tabActor)
+        return Select.many(db,tabActor)
                 .orderAscBy(tabActor.colID())
                 .result();
     }
@@ -48,7 +48,7 @@ public class Controller implements SakilaTables {
 
     @GetMapping("/actorMovies")
     public List<Film> actorMovies(int actorId){
-        return Select.from(db,tabFilm)
+        return Select.many(db,tabFilm)
                 .join(tabFilmActor,tabFilm.colFilmId())
                 .join(tabActor,tabFilmActor.colActorId(),
                         AND().and(tabActor.colID(),EQ,actorId))
@@ -58,7 +58,7 @@ public class Controller implements SakilaTables {
 
     @GetMapping("/actorFilmCategories")
     public List<String> actorFilmCategories(int actorId){
-        return Select.from(db,tabCategory.colNameTypeString1())
+        return Select.many(db,tabCategory.colNameTypeString1())
                 .join(tabFilmCategory,tabCategory.colCategoryId())
                 .join(tabFilm,tabFilmCategory.colFilmId())
                 .join(tabFilmActor,tabFilm.colFilmId(),AND().and(tabFilmActor.colActorId(),EQ,actorId))

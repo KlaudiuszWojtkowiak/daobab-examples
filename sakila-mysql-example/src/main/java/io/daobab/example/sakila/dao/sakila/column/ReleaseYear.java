@@ -3,13 +3,13 @@ package io.daobab.example.sakila.dao.sakila.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.ColumnRelationMap;
+import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
 import java.util.Objects;
 
 import java.sql.Date;
 
-public interface ReleaseYear<E extends EntityMap> extends ColumnRelationMap<E> {
+public interface ReleaseYear<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
@@ -38,18 +38,18 @@ public interface ReleaseYear<E extends EntityMap> extends ColumnRelationMap<E> {
             }
 
             @Override
-            public Class<Date> getColumnClass(){
+            public Class<Date> getFieldClass(){
                 return  Date.class;
             }
 
             @Override
-            public Date getColumnValue(ReleaseYear entity){
+            public Date getFieldValue(ReleaseYear entity){
                 if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"ReleaseYear");
                 return  entity.getReleaseYear();
             }
 
             @Override
-            public void setColumnValue(ReleaseYear entity, Date param){
+            public void setFieldValue(ReleaseYear entity, Date param){
                 if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"ReleaseYear");
                 entity.setReleaseYear(param);
             }

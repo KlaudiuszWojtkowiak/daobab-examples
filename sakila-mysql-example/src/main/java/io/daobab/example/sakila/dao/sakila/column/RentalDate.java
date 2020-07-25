@@ -3,13 +3,13 @@ package io.daobab.example.sakila.dao.sakila.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.ColumnRelationMap;
+import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
 import java.util.Objects;
 
 import java.sql.Timestamp;
 
-public interface RentalDate<E extends EntityMap> extends ColumnRelationMap<E> {
+public interface RentalDate<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
@@ -38,18 +38,18 @@ public interface RentalDate<E extends EntityMap> extends ColumnRelationMap<E> {
             }
 
             @Override
-            public Class<Timestamp> getColumnClass(){
+            public Class<Timestamp> getFieldClass(){
                 return  Timestamp.class;
             }
 
             @Override
-            public Timestamp getColumnValue(RentalDate entity){
+            public Timestamp getFieldValue(RentalDate entity){
                 if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"RentalDate");
                 return  entity.getRentalDate();
             }
 
             @Override
-            public void setColumnValue(RentalDate entity, Timestamp param){
+            public void setFieldValue(RentalDate entity, Timestamp param){
                 if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"RentalDate");
                 entity.setRentalDate(param);
             }

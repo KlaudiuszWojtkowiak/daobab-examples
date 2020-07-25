@@ -3,13 +3,13 @@ package io.daobab.example.sakila.dao.sakila.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.ColumnRelationMap;
+import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
 import java.util.Objects;
 
 import java.math.BigDecimal;
 
-public interface Price<E extends EntityMap> extends ColumnRelationMap<E> {
+public interface Price<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
@@ -38,18 +38,18 @@ public interface Price<E extends EntityMap> extends ColumnRelationMap<E> {
             }
 
             @Override
-            public Class<BigDecimal> getColumnClass(){
+            public Class<BigDecimal> getFieldClass(){
                 return  BigDecimal.class;
             }
 
             @Override
-            public BigDecimal getColumnValue(Price entity){
+            public BigDecimal getFieldValue(Price entity){
                 if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"Price");
                 return  entity.getPrice();
             }
 
             @Override
-            public void setColumnValue(Price entity, BigDecimal param){
+            public void setFieldValue(Price entity, BigDecimal param){
                 if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"Price");
                 entity.setPrice(param);
             }
