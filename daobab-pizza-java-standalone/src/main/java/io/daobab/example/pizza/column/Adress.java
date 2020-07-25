@@ -3,10 +3,10 @@ package io.daobab.example.pizza.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.ColumnRelationMap;
+import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
 
-public interface Adress<E extends EntityMap> extends ColumnRelationMap<E> {
+public interface Adress<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
@@ -17,7 +17,7 @@ public interface Adress<E extends EntityMap> extends ColumnRelationMap<E> {
     default E setAdress(String val){setColumnParam("adress",val); return (E)this;}
 
     default Column<E,String,Adress> colAdress(){
-        return new Column<>() {
+        return new Column<E,String,Adress>() {
 
             @Override
             public String getColumnName() {
@@ -35,18 +35,18 @@ public interface Adress<E extends EntityMap> extends ColumnRelationMap<E> {
             }
 
             @Override
-            public Class<String> getColumnClass(){
+            public Class<String> getFieldClass(){
                 return  String.class;
             }
 
             @Override
-            public String getColumnValue(Adress entity){
+            public String getFieldValue(Adress entity){
                 if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"adress");
                 return  entity.getAdress();
             }
 
             @Override
-            public void setColumnValue(Adress entity, String param){
+            public void setFieldValue(Adress entity, String param){
                 if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"adress");
                 entity.setAdress(param);
             }

@@ -17,7 +17,7 @@ public class PizzaDataBase extends DataBaseTarget implements PizzaTables{
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setUser("root");
         dataSource.setPassword("admin");
-        dataSource.setURL("jdbc:mysql://127.0.0.1:3306/pizza?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+        dataSource.setURL("jdbc:mysql://127.0.0.1:3306/pizza?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false");
 
         return dataSource;
     }

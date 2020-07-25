@@ -3,10 +3,10 @@ package io.daobab.example.pizza.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.ColumnRelationMap;
+import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
 
-public interface Phone<E extends EntityMap> extends ColumnRelationMap<E> {
+public interface Phone<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
@@ -35,18 +35,18 @@ public interface Phone<E extends EntityMap> extends ColumnRelationMap<E> {
             }
 
             @Override
-            public Class<String> getColumnClass(){
+            public Class<String> getFieldClass(){
                 return  String.class;
             }
 
             @Override
-            public String getColumnValue(Phone entity){
+            public String getFieldValue(Phone entity){
                 if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"phone");
                 return  entity.getPhone();
             }
 
             @Override
-            public void setColumnValue(Phone entity, String param){
+            public void setFieldValue(Phone entity, String param){
                 if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"phone");
                 entity.setPhone(param);
             }

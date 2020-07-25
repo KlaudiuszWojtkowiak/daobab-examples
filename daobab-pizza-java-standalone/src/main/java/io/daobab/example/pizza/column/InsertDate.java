@@ -3,12 +3,12 @@ package io.daobab.example.pizza.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.ColumnRelationMap;
+import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
 
 import java.sql.Timestamp;
 
-public interface InsertDate<E extends EntityMap> extends ColumnRelationMap<E> {
+public interface InsertDate<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
@@ -37,18 +37,18 @@ public interface InsertDate<E extends EntityMap> extends ColumnRelationMap<E> {
             }
 
             @Override
-            public Class<Timestamp> getColumnClass(){
+            public Class<Timestamp> getFieldClass(){
                 return  Timestamp.class;
             }
 
             @Override
-            public Timestamp getColumnValue(InsertDate entity){
+            public Timestamp getFieldValue(InsertDate entity){
                 if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"insertDate");
                 return  entity.getInsertDate();
             }
 
             @Override
-            public void setColumnValue(InsertDate entity, Timestamp param){
+            public void setFieldValue(InsertDate entity, Timestamp param){
                 if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"insertDate");
                 entity.setInsertDate(param);
             }

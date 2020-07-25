@@ -10,9 +10,7 @@ public class App implements PizzaTables {
 
     public void start(){
 
-
-
-        Select.fieldList(db,tabPizza.colName()).orderAscBy(tabPizza.colName()).consumeEach(System.out::println);
+        Select.many(db,tabPizza.colName()).orderAscBy(tabPizza.colName()).forEach(System.out::println);
 
 
     }
